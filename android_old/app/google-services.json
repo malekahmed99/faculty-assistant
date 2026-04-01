@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1070320027614",
+    "project_id": "faculty-guide-system",
+    "storage_bucket": "faculty-guide-system.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070320027614:android:d65677f9146266ec447f4f",
+        "android_client_info": {
+          "package_name": "com.example.ai_campus_guide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFv3ElZasvow8bv4e6MWaQVRaiF0hlmlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070320027614:android:57e1e716f4237044447f4f",
+        "android_client_info": {
+          "package_name": "com.mmw.faculty_guide_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFv3ElZasvow8bv4e6MWaQVRaiF0hlmlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
