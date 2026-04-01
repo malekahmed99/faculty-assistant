@@ -177,7 +177,7 @@ Future<void> _seedLocations(FirebaseService firebaseService) async {
     await firebaseService.addDocument(
         'locations', location.id, location.toMap());
   }
-  print('Sample locations seeded');
+   print('Sample locations seeded');
 }
 
 Future<void> _seedCategories(FirebaseService firebaseService) async {

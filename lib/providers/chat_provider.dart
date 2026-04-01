@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/chat_message_model.dart';
-import '../models/ai_response.dart';
-import '../models/location_model.dart';
+// import '../models/ai_response.dart';
+// import '../models/location_model.dart';
 import '../services/ai_service.dart';
 import '../providers/locations_provider.dart';
 

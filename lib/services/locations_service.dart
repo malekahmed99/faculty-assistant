@@ -43,7 +43,7 @@ class LocationsService {
           .get();
       return snapshot.docs
           .map((doc) =>
-              LocationModel.fromMap(doc.data() as Map<String, dynamic>, doc.id))
+              LocationModel.fromMap(doc.data(), doc.id))
           .toList();
     } catch (e) {
       print('Error fetching locations by category: $e');
