@@ -62,176 +62,174 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final featuredLocationsAsync = ref.watch(featuredLocationsProvider);
 
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            // App Bar
-            SliverAppBar(
-              floating: true,
-              backgroundColor: Theme.of(context).primaryColor,
-              title: const Text(
-                AppConstants.appName,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              centerTitle: true,
-              elevation: 0,
+      body: CustomScrollView(
+        slivers: [
+          // App Bar
+          SliverAppBar(
+            floating: true,
+            backgroundColor: Theme.of(context).primaryColor,
+            title: const Text(
+              AppConstants.appName,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            centerTitle: true,
+            elevation: 0,
+          ),
 
-            // Search Section
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Welcome text
-                    Text(
-                      'Welcome to Campus!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade800,
-                      ),
+          // Search Section
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Welcome text
+                  Text(
+                    'Welcome to Campus!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade800,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Find what you need on campus',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
-                      ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Find what you need on campus',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
                     ),
-                    const SizedBox(height: 16),
+                  ),
+                  const SizedBox(height: 16),
 
-                    // Search bar
-                    CustomSearchBar(
-                      controller: _searchController,
-                      hintText: 'Search for places, services...',
-                      onSubmitted: () => _onSearch(_searchController.text),
-                      onClear: () => setState(() {}),
-                    ),
-                  ],
-                ),
+                  // Search bar
+                  CustomSearchBar(
+                    controller: _searchController,
+                    hintText: 'Search for places, services...',
+                    onSubmitted: () => _onSearch(_searchController.text),
+                    onClear: () => setState(() {}),
+                  ),
+                ],
               ),
             ),
+          ),
 
-            // Categories Section
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Browse by Category',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+          // Categories Section
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Browse by Category',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  categoriesAsync.when(
+                    data: (categories) => SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: categories.map((category) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: CategoryChip(
+                              category: category,
+                              onTap: () => _onCategoryTap(category),
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
-                    const SizedBox(height: 12),
-                    categoriesAsync.when(
-                      data: (categories) => SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: categories.map((category) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: CategoryChip(
-                                category: category,
-                                onTap: () => _onCategoryTap(category),
-                              ),
-                            );
-                          }).toList(),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    error: (error, stack) => Text('Error: $error'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+
+          // Featured Locations Section
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Featured Locations',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ServicesScreen(),
+                      ),
+                    ),
+                    child: const Text('See All'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Featured Locations List
+          featuredLocationsAsync.when(
+            data: (locations) => SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  final location = locations[index];
+                  return LocationCard(
+                    location: location,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => LocationDetailsScreen(
+                          locationId: location.id,
                         ),
                       ),
-                      loading: () => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      error: (error, stack) => Text('Error: $error'),
                     ),
-                  ],
-                ),
+                  );
+                },
+                childCount: locations.length,
               ),
             ),
+            loading: () => const SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (error, stack) => SliverToBoxAdapter(
+              child: Center(child: Text('Error: $error')),
+            ),
+          ),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-            // Featured Locations Section
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Featured Locations',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const ServicesScreen(),
-                        ),
-                      ),
-                      child: const Text('See All'),
-                    ),
-                  ],
-                ),
+          // Open Map Button
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: PrimaryButton(
+                text: 'Open Campus Map',
+                icon: Icons.map,
+                isExpanded: true,
+                onPressed: _openMap,
               ),
             ),
+          ),
 
-            // Featured Locations List
-            featuredLocationsAsync.when(
-              data: (locations) => SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final location = locations[index];
-                    return LocationCard(
-                      location: location,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => LocationDetailsScreen(
-                            locationId: location.id,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  childCount: locations.length,
-                ),
-              ),
-              loading: () => const SliverToBoxAdapter(
-                child: Center(child: CircularProgressIndicator()),
-              ),
-              error: (error, stack) => SliverToBoxAdapter(
-                child: Center(child: Text('Error: $error')),
-              ),
-            ),
-
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
-
-            // Open Map Button
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: PrimaryButton(
-                  text: 'Open Campus Map',
-                  icon: Icons.map,
-                  isExpanded: true,
-                  onPressed: _openMap,
-                ),
-              ),
-            ),
-
-            const SliverToBoxAdapter(child: SizedBox(height: 80)),
-          ],
-        ),
+          const SliverToBoxAdapter(child: SizedBox(height: 80)),
+        ],
       ),
     );
   }
