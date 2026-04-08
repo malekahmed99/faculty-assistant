@@ -90,8 +90,12 @@ class MapsService {
 
   double _sinTaylor(double x) {
     // Normalize to [-pi, pi]
-    while (x > 3.141592653589793) x -= 2 * 3.141592653589793;
-    while (x < -3.141592653589793) x += 2 * 3.141592653589793;
+    while (x > 3.141592653589793) {
+      x -= 2 * 3.141592653589793;
+    }
+    while (x < -3.141592653589793) {
+      x += 2 * 3.141592653589793;
+    }
     
     double result = x;
     double term = x;

@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<void> main() async {
   await Firebase.initializeApp();
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // Seed Categories
   final categories = <Map<String, dynamic>>[
@@ -176,14 +176,14 @@ Future<void> main() async {
   // Clear and seed categories
   print('Seeding categories...');
   for (final category in categories) {
-    await _firestore.collection('categories').doc(category['id']).set(category);
+    await firestore.collection('categories').doc(category['id']).set(category);
     print('Added category: ${category['name']}');
   }
 
   // Clear and seed locations
   print('Seeding locations...');
   for (final location in locations) {
-    await _firestore.collection('locations').doc(location['id']).set(location);
+    await firestore.collection('locations').doc(location['id']).set(location);
     print('Added location: ${location['name']}');
   }
 
