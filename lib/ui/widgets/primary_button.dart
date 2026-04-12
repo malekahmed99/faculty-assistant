@@ -144,7 +144,8 @@ class IconButtonCustom extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Theme.of(context).primaryColor.withOpacity(0.1),
+        color: backgroundColor ??
+            Theme.of(context).primaryColor.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: IconButton(
@@ -158,4 +159,3 @@ class IconButtonCustom extends StatelessWidget {
     );
   }
 }
-

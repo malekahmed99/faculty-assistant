@@ -1,10 +1,10 @@
+import 'package:ai_campus_guide/features/home_feature/presentation/view/home_header_section.dart.dart';
+import 'package:ai_campus_guide/features/home_feature/presentation/widgets/access_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/locations_provider.dart';
 import '../../providers/categories_provider.dart';
-import '../../core/utils/constants.dart';
 import '../../models/category_model.dart';
-import '../widgets/search_bar.dart';
 import '../widgets/category_chip.dart';
 import '../widgets/location_card.dart';
 import '../widgets/primary_button.dart';
@@ -20,11 +20,36 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _blinkController;
+  late Animation<double> _blinkAnimation;
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
   final TextEditingController _searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _blinkController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+    _blinkAnimation =
+        Tween<double>(begin: 1.0, end: 0.3).animate(_blinkController);
+
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    )..forward();
+    _fadeAnimation =
+        CurvedAnimation(parent: _fadeController, curve: Curves.easeOut);
+  }
+
+  @override
   void dispose() {
+    _blinkController.dispose();
+    _fadeController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -63,168 +88,123 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
-          // App Bar
-          SliverAppBar(
-            floating: true,
-            backgroundColor: Theme.of(context).primaryColor,
-            title: const Text(
-              AppConstants.appName,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            elevation: 0,
-          ),
-
-          // Search Section
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Welcome text
-                  Text(
-                    'Welcome to Campus!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Find what you need on campus',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Search bar
-                  CustomSearchBar(
-                    controller: _searchController,
-                    hintText: 'Search for places, services...',
-                    onSubmitted: () => _onSearch(_searchController.text),
-                    onClear: () => setState(() {}),
-                  ),
-                ],
-              ),
-            ),
+            child: HomeHeaderSection(blinkAnim: _blinkAnimation),
           ),
 
           // Categories Section
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Browse by Category',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  categoriesAsync.when(
-                    data: (categories) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: categories.map((category) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: CategoryChip(
-                              category: category,
-                              onTap: () => _onCategoryTap(category),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    error: (error, stack) => Text('Error: $error'),
-                  ),
-                ],
-              ),
+            child: AccessSection(
+              fadeAnimation: _fadeAnimation,
             ),
+            //     Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       const Text(
+            //         'Browse by Category',
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       const SizedBox(height: 12),
+            //       categoriesAsync.when(
+            //         data: (categories) => SingleChildScrollView(
+            //           scrollDirection: Axis.horizontal,
+            //           child: Row(
+            //             children: categories.map((category) {
+            //               return Padding(
+            //                 padding: const EdgeInsets.only(right: 8),
+            //                 child: CategoryChip(
+            //                   category: category,
+            //                   onTap: () => _onCategoryTap(category),
+            //                 ),
+            //               );
+            //             }).toList(),
+            //           ),
+            //         ),
+            //         loading: () => const Center(
+            //           child: CircularProgressIndicator(),
+            //         ),
+            //         error: (error, stack) => Text('Error: $error'),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ),
 
           const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
           // Featured Locations Section
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Featured Locations',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ServicesScreen(),
-                      ),
-                    ),
-                    child: const Text('See All'),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 16),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         const Text(
+          //           'Featured Locations',
+          //           style: TextStyle(
+          //             fontSize: 18,
+          //             fontWeight: FontWeight.bold,
+          //           ),
+          //         ),
+          //         TextButton(
+          //           onPressed: () => Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (_) => const ServicesScreen(),
+          //             ),
+          //           ),
+          //           child: const Text('See All'),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
 
-          // Featured Locations List
-          featuredLocationsAsync.when(
-            data: (locations) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final location = locations[index];
-                  return LocationCard(
-                    location: location,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => LocationDetailsScreen(
-                          locationId: location.id,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                childCount: locations.length,
-              ),
-            ),
-            loading: () => const SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (error, stack) => SliverToBoxAdapter(
-              child: Center(child: Text('Error: $error')),
-            ),
-          ),
+          // // Featured Locations List
+          // featuredLocationsAsync.when(
+          //   data: (locations) => SliverList(
+          //     delegate: SliverChildBuilderDelegate(
+          //       (context, index) {
+          //         final location = locations[index];
+          //         return LocationCard(
+          //           location: location,
+          //           onTap: () => Navigator.push(
+          //             context,
+          //             MaterialPageRoute(
+          //               builder: (_) => LocationDetailsScreen(
+          //                 locationId: location.id,
+          //               ),
+          //             ),
+          //           ),
+          //         );
+          //       },
+          //       childCount: locations.length,
+          //     ),
+          //   ),
+          //   loading: () => const SliverToBoxAdapter(
+          //     child: Center(child: CircularProgressIndicator()),
+          //   ),
+          //   error: (error, stack) => SliverToBoxAdapter(
+          //     child: Center(child: Text('Error: $error')),
+          //   ),
+          // ),
 
           const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
           // Open Map Button
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: PrimaryButton(
-                text: 'Open Campus Map',
-                icon: Icons.map,
-                isExpanded: true,
-                onPressed: _openMap,
-              ),
+            child: PrimaryButton(
+              text: 'Open Campus Map',
+              icon: Icons.map,
+              isExpanded: true,
+              onPressed: _openMap,
             ),
           ),
 
@@ -234,5 +214,3 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
-
-
