@@ -1,4 +1,5 @@
 import 'package:ai_campus_guide/app.dart';
+import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/core/theme/app_theme.dart';
 import 'package:ai_campus_guide/core/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.primaryColor,
+      backgroundColor: AppColors.primary,
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
