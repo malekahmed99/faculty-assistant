@@ -1,17 +1,14 @@
-import 'package:ai_campus_guide/features/home_feature/presentation/view/home_header_section.dart.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/access_section.dart';
+import 'package:ai_campus_guide/features/home_feature/presentation/widgets/home_header_section.dart.dart';
+import 'package:ai_campus_guide/models/category_model.dart';
+import 'package:ai_campus_guide/providers/categories_provider.dart';
+import 'package:ai_campus_guide/providers/locations_provider.dart';
+import 'package:ai_campus_guide/ui/screens/map_screen.dart';
+import 'package:ai_campus_guide/ui/screens/search_results_screen.dart';
+import 'package:ai_campus_guide/ui/screens/services_screen.dart';
+import 'package:ai_campus_guide/ui/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/locations_provider.dart';
-import '../../providers/categories_provider.dart';
-import '../../models/category_model.dart';
-import '../widgets/category_chip.dart';
-import '../widgets/location_card.dart';
-import '../widgets/primary_button.dart';
-import 'services_screen.dart';
-import 'map_screen.dart';
-import 'search_results_screen.dart';
-import 'location_details_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

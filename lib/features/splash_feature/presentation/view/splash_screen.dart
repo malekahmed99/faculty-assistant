@@ -1,7 +1,7 @@
+import 'package:ai_campus_guide/app.dart';
+import 'package:ai_campus_guide/core/theme/app_theme.dart';
+import 'package:ai_campus_guide/core/utils/constants.dart';
 import 'package:flutter/material.dart';
-import '../../core/utils/constants.dart';
-import '../../core/theme/app_theme.dart';
-import '../../app.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -122,4 +122,3 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
-
