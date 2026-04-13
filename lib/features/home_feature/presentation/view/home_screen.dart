@@ -1,3 +1,5 @@
+import 'package:ai_campus_guide/core/theme/app_colors.dart';
+import 'package:ai_campus_guide/core/utils/custom_button.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/access_section.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/home_header_section.dart.dart';
 import 'package:ai_campus_guide/models/category_model.dart';
@@ -6,7 +8,6 @@ import 'package:ai_campus_guide/providers/locations_provider.dart';
 import 'package:ai_campus_guide/ui/screens/map_screen.dart';
 import 'package:ai_campus_guide/ui/screens/search_results_screen.dart';
 import 'package:ai_campus_guide/ui/screens/services_screen.dart';
-import 'package:ai_campus_guide/ui/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,14 +63,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     }
   }
 
-  void _onCategoryTap(CategoryModel category) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ServicesScreen(initialCategory: category.name),
-      ),
-    );
-  }
+  // void _onCategoryTap(CategoryModel category) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (_) => ServicesScreen(initialCategory: category.name),
+  //     ),
+  //   );
+  // }
 
   void _openMap() {
     Navigator.push(
@@ -84,6 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final featuredLocationsAsync = ref.watch(featuredLocationsProvider);
 
     return Scaffold(
+      backgroundColor: AppColors.surface2,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -96,7 +98,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             child: AccessSection(
               fadeAnimation: _fadeAnimation,
             ),
-            //     Padding(
+          ),
+
+          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+
+          SliverToBoxAdapter(
+            child: CustomButton(
+              text: 'Open Campus Map',
+              backgroundColor: AppColors.primary,
+              onTap: _openMap,
+              fontSize: 18,
+              borderRadius: 12,
+            ),
+          ),
+
+          const SliverToBoxAdapter(child: SizedBox(height: 80)),
+        ],
+      ),
+    );
+  }
+}
+
+ //     Padding(
             //   padding: const EdgeInsets.symmetric(horizontal: 16),
             //   child: Column(
             //     crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,9 +155,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             //     ],
             //   ),
             // ),
-          ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
           // Featured Locations Section
           // SliverToBoxAdapter(
@@ -192,22 +213,3 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           //     child: Center(child: Text('Error: $error')),
           //   ),
           // ),
-
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
-
-          // Open Map Button
-          SliverToBoxAdapter(
-            child: PrimaryButton(
-              text: 'Open Campus Map',
-              icon: Icons.map,
-              isExpanded: true,
-              onPressed: _openMap,
-            ),
-          ),
-
-          const SliverToBoxAdapter(child: SizedBox(height: 80)),
-        ],
-      ),
-    );
-  }
-}
