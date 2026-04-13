@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class WelcomeSectionHomeScreen extends StatelessWidget {
-  const WelcomeSectionHomeScreen({super.key});
-
+  const WelcomeSectionHomeScreen({super.key, required this.tileName, required this.subTitle, required this.description});
+final String tileName;
+final String subTitle;
+final String description;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,18 +22,18 @@ class WelcomeSectionHomeScreen extends StatelessWidget {
 
         // title
         RichText(
-          text: const TextSpan(
-            style: TextStyle(
+          text:  TextSpan(
+            style: const TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w900,
               color: Colors.white,
               height: 1.2,
             ),
             children: [
-              TextSpan(text: 'Campus Guide\n'),
+              TextSpan(text: '$tileName\n'),
               TextSpan(
-                text: 'Sciences',
-                style: TextStyle(color: Color(0xFF93C5FD)),
+                text: subTitle,
+                style: const TextStyle(color: Color(0xFF93C5FD)),
               ),
             ],
           ),
@@ -40,8 +42,8 @@ class WelcomeSectionHomeScreen extends StatelessWidget {
 
         // subtitle
         Text(
-          'University of Ain Shams — Everything you need in one place',
-          style: TextStyle(
+          description,
+          style:  TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w400,
             color: Colors.white.withValues(alpha: 0.6),

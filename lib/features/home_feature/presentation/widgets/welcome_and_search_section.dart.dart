@@ -4,13 +4,14 @@ import 'package:ai_campus_guide/features/home_feature/presentation/widgets/searc
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/welcome_section_home_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeHeaderSection extends StatelessWidget {
+class WelcomeAndSearchSection extends StatelessWidget {
   final Animation<double> blinkAnim;
-  const HomeHeaderSection({super.key, required this.blinkAnim});
+  const WelcomeAndSearchSection({super.key, required this.blinkAnim});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 400,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -31,9 +32,17 @@ class HomeHeaderSection extends StatelessWidget {
                 children: [
                   CustomHomeAppBar(blinkAnim: blinkAnim),
                   const SizedBox(height: 20),
-                  const WelcomeSectionHomeScreen(),
+                  const WelcomeSectionHomeScreen(
+                    tileName: 'Campus Guide',
+                    subTitle: 'Sciences',
+                    description:
+                        'University of Ain Shams — Everything you need in one place',
+                  ),
                   const SizedBox(height: 18),
-                  const SearchSection(),
+                  const SearchSection(
+                    fillColor: Colors.transparent,
+                    hintText: 'Search for places, services...',
+                  ),
                 ],
               ),
             ),
