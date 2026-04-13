@@ -1,9 +1,13 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/service_feature/data/model/service_item.dart';
 import 'package:flutter/material.dart';
+
 class ServiceCard extends StatefulWidget {
   final ServiceItem item;
-  const ServiceCard({super.key, required this.item,});
+  const ServiceCard({
+    super.key,
+    required this.item,
+  });
   @override
   State<ServiceCard> createState() => ServiceCardState();
 }
