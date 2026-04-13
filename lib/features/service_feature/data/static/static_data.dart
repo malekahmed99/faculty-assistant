@@ -1,5 +1,4 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
-import 'package:ai_campus_guide/features/service_feature/data/model/contact_item.dart';
 import 'package:ai_campus_guide/features/service_feature/data/model/service_item.dart';
 import 'package:flutter/material.dart';
 
@@ -27,36 +26,5 @@ const services = [
     bgColor: Color(0xFFCCFBF1),
     borderColor: Color(0xFF99F6E4),
     accentColor: Colors.black,
-  ),
-];
-
-const contacts = [
-  ContactItem(
-    emoji: '🏛️',
-    label: 'عميد الكلية',
-    value: 'مبنى A — مكتب 101',
-    actionLabel: 'اتصال',
-    color: AppColors.primary,
-  ),
-  ContactItem(
-    emoji: '📋',
-    label: 'شؤون الطلاب',
-    value: '02-2456-7890',
-    actionLabel: 'اتصال',
-    color: AppColors.green,
-  ),
-  ContactItem(
-    emoji: '📧',
-    label: 'البريد الإلكتروني',
-    value: 'info@science.edu.eg',
-    actionLabel: 'راسلنا',
-    color: AppColors.amber,
-  ),
-  ContactItem(
-    emoji: '🌐',
-    label: 'الموقع الإلكتروني',
-    value: 'science.cu.edu.eg',
-    actionLabel: 'زيارة',
-    color: AppColors.purple,
   ),
 ];
