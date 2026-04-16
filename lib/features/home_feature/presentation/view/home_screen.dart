@@ -2,7 +2,7 @@ import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/core/utils/custom_button.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/access_section.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/welcome_and_search_section.dart.dart';
-import 'package:ai_campus_guide/ui/screens/map_screen.dart';
+import 'package:ai_campus_guide/features/map_feature/presentation/view/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

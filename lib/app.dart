@@ -1,14 +1,14 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/view/home_screen.dart';
+import 'package:ai_campus_guide/features/chat_bot_feature/presentation/view/chat_bot_screen.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/view/service_screen.dart';
 import 'package:ai_campus_guide/features/splash_feature/presentation/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/constants.dart';
-import 'ui/screens/map_screen.dart';
-import 'ui/screens/ai_assistant_screen.dart';
-import 'ui/widgets/bottom_nav.dart';
+import 'features/map_feature/presentation/view/map_screen.dart';
+import 'core/utils/bottom_nav.dart';
 
 class AICampusGuideApp extends StatelessWidget {
   const AICampusGuideApp({super.key});
@@ -39,7 +39,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
     const HomeScreen(),
     const ServicesScreen(),
     const MapScreen(),
-    const AiAssistantScreen(),
+    const ChatBotScreen(),
   ];
 
   @override
