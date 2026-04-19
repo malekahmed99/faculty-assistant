@@ -7,7 +7,8 @@ class ServiceItem {
   final Color bgColor;
   final Color borderColor;
   final Color accentColor;
- 
+  final VoidCallback? onTap; // ← السطر الجديد الوحيد
+
   const ServiceItem({
     required this.icon,
     required this.title,
@@ -15,5 +16,6 @@ class ServiceItem {
     required this.bgColor,
     required this.borderColor,
     required this.accentColor,
+    this.onTap, // اختياري — الكاردات القديمة مش محتاجة تحدده
   });
 }
