@@ -16,11 +16,9 @@ class _GpaCalculatorScreenState extends State<GpaCalculatorScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabCtrl;
 
-  // ── Semester tab state ────────────────────────────────────────────────────
   final List<GpaCourse> _courses = [GpaCourse(), GpaCourse(), GpaCourse()];
   double? _semResult;
 
-  // ── Cumulative tab state ──────────────────────────────────────────────────
   final List<SemesterEntry> _semesters = [
     SemesterEntry(),
     SemesterEntry(),

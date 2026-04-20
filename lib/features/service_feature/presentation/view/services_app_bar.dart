@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ServicesAppBar extends StatelessWidget {
   final TabController tabController;
   final bool forceElevated;
-  const ServicesAppBar({super.key, 
+  const ServicesAppBar({super.key,
     required this.tabController,
     required this.forceElevated,
   });

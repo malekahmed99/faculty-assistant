@@ -1,5 +1,6 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/service_feature/data/model/faq_item.dart';
+import 'package:ai_campus_guide/features/service_feature/data/static/static_data.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_tab.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/view/services_app_bar.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/view/services_tab.dart';
@@ -70,13 +71,12 @@ class _ServicesScreenState extends State<ServicesScreen>
         body: TabBarView(
           controller: _tabCtrl,
           children: [
-            const ServicesTab(), // ← مفيش parameters دلوقتي
+            const ServicesTab(services: services),
             FaqTab(
-              faqs: _faqs,
-              onToggle: (i) {
-                setState(() => _faqs[i].isOpen = !_faqs[i].isOpen);
-              },
-            ),
+                faqs: _faqs,
+                onToggle: (i) {
+                  setState(() => _faqs[i].isOpen = !_faqs[i].isOpen);
+                }),
           ],
         ),
       ),
