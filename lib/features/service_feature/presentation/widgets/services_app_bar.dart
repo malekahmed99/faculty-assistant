@@ -1,5 +1,5 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/view/service_tab_bar.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/widgets/service_tab_bar.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/widgets/services_header.dart';
 import 'package:flutter/material.dart';
 

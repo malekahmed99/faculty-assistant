@@ -2,13 +2,13 @@ import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/feature_label.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/widgets/search_section.dart';
 import 'package:ai_campus_guide/features/service_feature/data/model/faq_item.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_card.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/widgets/faq_card.dart';
 import 'package:flutter/material.dart';
 
-class FaqTab extends StatelessWidget {
+class FaqPartScreen extends StatelessWidget {
   final List<FaqItem> faqs;
   final void Function(int) onToggle;
-  const FaqTab({super.key, required this.faqs, required this.onToggle});
+  const FaqPartScreen({super.key, required this.faqs, required this.onToggle});
 
   @override
   Widget build(BuildContext context) {

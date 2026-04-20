@@ -1,21 +1,20 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/service_feature/data/model/faq_item.dart';
 import 'package:ai_campus_guide/features/service_feature/data/static/static_data.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_tab.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/view/services_app_bar.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/view/services_tab.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_part_screen.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/widgets/services_app_bar.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/widgets/services_part_screen.dart';
 import 'package:flutter/material.dart';
 
-class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({super.key});
+class FaqItemData extends StatefulWidget {
+  const FaqItemData({super.key});
   @override
-  State<ServicesScreen> createState() => _ServicesScreenState();
+  State<FaqItemData> createState() => _FaqItemDataState();
 }
 
-class _ServicesScreenState extends State<ServicesScreen>
+class _FaqItemDataState extends State<FaqItemData>
     with SingleTickerProviderStateMixin {
   late TabController _tabCtrl;
-
   final List<FaqItem> _faqs = [
     FaqItem(
       question: 'How do I register for courses?',
@@ -59,6 +58,8 @@ class _ServicesScreenState extends State<ServicesScreen>
 
   @override
   Widget build(BuildContext context) {
+    final services = getServices(context);
+
     return Scaffold(
       backgroundColor: AppColors.surface2,
       body: NestedScrollView(
@@ -71,8 +72,8 @@ class _ServicesScreenState extends State<ServicesScreen>
         body: TabBarView(
           controller: _tabCtrl,
           children: [
-            const ServicesTab(services: services),
-            FaqTab(
+            ServicesTab(services: services),
+            FaqPartScreen(
                 faqs: _faqs,
                 onToggle: (i) {
                   setState(() => _faqs[i].isOpen = !_faqs[i].isOpen);
