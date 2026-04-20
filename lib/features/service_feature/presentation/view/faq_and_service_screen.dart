@@ -3,16 +3,16 @@ import 'package:ai_campus_guide/features/service_feature/data/model/faq_item.dar
 import 'package:ai_campus_guide/features/service_feature/data/static/static_data.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_part_screen.dart';
 import 'package:ai_campus_guide/features/service_feature/presentation/widgets/services_app_bar.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/widgets/services_part_screen.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/view/services_part_screen.dart';
 import 'package:flutter/material.dart';
 
-class FaqItemData extends StatefulWidget {
-  const FaqItemData({super.key});
+class FaqScreen extends StatefulWidget {
+  const FaqScreen({super.key});
   @override
-  State<FaqItemData> createState() => _FaqItemDataState();
+  State<FaqScreen> createState() => _FaqScreenState();
 }
 
-class _FaqItemDataState extends State<FaqItemData>
+class _FaqScreenState extends State<FaqScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabCtrl;
   final List<FaqItem> _faqs = [

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class ServiceTabBar extends StatelessWidget {
   final TabController controller;
-  const ServiceTabBar({super.key, required this.controller});
-
+  const ServiceTabBar({super.key, required this.controller, required this.tab1, required this.tab2});
+final String tab1,tab2;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,9 +24,9 @@ class ServiceTabBar extends StatelessWidget {
           fontSize: 13,
           fontWeight: FontWeight.w500,
         ),
-        tabs: const [
-          Tab(text: 'Services'),
-          Tab(text: 'FAQ'),
+        tabs:  [
+          Tab(text: tab1),
+          Tab(text: tab2),
         ],
       ),
     );

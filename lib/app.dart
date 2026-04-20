@@ -1,7 +1,7 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/features/home_feature/presentation/view/home_screen.dart';
 import 'package:ai_campus_guide/features/chat_bot_feature/presentation/view/chat_bot_screen.dart';
-import 'package:ai_campus_guide/features/service_feature/presentation/widgets/faq_item_data.dart';
+import 'package:ai_campus_guide/features/service_feature/presentation/view/faq_and_service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'features/map_feature/presentation/view/map_screen.dart';
@@ -20,7 +20,7 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const FaqItemData(),
+    const FaqScreen(),
     const MapScreen(),
     const ChatBotScreen(),
   ];
