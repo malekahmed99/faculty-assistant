@@ -6,13 +6,16 @@ class SearchSection extends StatelessWidget {
     required this.fillColor,
     this.border,
     required this.hintText,
-    this.iconAndTextColor, this.cursorColor,
+    this.iconAndTextColor,
+    this.cursorColor,
+    this.textColor,
   });
   final Color fillColor;
   final InputBorder? border;
   final String hintText;
   final Color? iconAndTextColor;
-final Color? cursorColor;
+  final Color? cursorColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +27,11 @@ final Color? cursorColor;
             Border.all(color: Colors.white.withValues(alpha: 0.22), width: 1.5),
       ),
       child: TextField(
-        cursorColor: cursorColor??Colors.white,
+        style: TextStyle(
+          fontSize: 13,
+          color: textColor ?? Colors.white,
+        ),
+        cursorColor: cursorColor ?? Colors.white,
         decoration: InputDecoration(
           enabledBorder: border ?? InputBorder.none,
           focusedBorder: border ?? InputBorder.none,

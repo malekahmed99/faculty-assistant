@@ -19,6 +19,7 @@ class FaqTab extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(18, 18, 18, 0),
             child: SearchSection(
+              textColor: AppColors.primaryDark,
               cursorColor: AppColors.primaryDark,
               fillColor: AppColors.surface,
               hintText: 'Search for some questions...',
