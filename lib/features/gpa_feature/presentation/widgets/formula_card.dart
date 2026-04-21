@@ -5,7 +5,7 @@ class FormulaCard extends StatelessWidget {
   final String formulaAr;
   final String formulaEn;
 
-  const FormulaCard({required this.formulaAr, required this.formulaEn});
+  const FormulaCard({super.key, required this.formulaAr, required this.formulaEn});
 
   @override
   Widget build(BuildContext context) {

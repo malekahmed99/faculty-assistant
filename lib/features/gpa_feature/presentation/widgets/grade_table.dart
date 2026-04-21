@@ -4,7 +4,7 @@ import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/t_h.da
 import 'package:flutter/material.dart';
 
 class GradeTable extends StatelessWidget {
-  const GradeTable();
+  const GradeTable({super.key});
 
   static const _rows = [
     ('A', '4.00', 'ممتاز', '≥ 90%'),

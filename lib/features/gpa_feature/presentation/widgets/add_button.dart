@@ -5,7 +5,7 @@ class AddButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const AddButton({required this.label, required this.onTap});
+  const AddButton({super.key, required this.label, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

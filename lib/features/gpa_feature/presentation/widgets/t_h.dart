@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class TH extends StatelessWidget {
   final String text;
-  const TH(this.text);
+  const TH(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {

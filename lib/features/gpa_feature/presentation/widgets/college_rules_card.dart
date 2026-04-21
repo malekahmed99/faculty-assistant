@@ -2,7 +2,7 @@ import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CollegeRulesCard extends StatelessWidget {
-  const CollegeRulesCard();
+  const CollegeRulesCard({super.key});
 
   @override
   Widget build(BuildContext context) {

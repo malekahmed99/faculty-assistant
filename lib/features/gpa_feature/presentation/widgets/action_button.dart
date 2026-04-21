@@ -7,7 +7,7 @@ class ActionButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool small;
 
-  const ActionButton({
+  const ActionButton({super.key, 
     required this.label,
     required this.icon,
     required this.color,

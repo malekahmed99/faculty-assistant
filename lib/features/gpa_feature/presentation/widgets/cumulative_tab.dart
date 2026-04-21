@@ -1,5 +1,4 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
-import 'package:ai_campus_guide/features/gpa_feature/presentation/view/gpa_calculator_screen.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/action_button.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/add_button.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/college_rules_card.dart';
