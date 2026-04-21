@@ -16,8 +16,12 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^5.2.1
+  flutter_map: ^8.3.0
   flutter_riverpod: ^2.6.1
+  geolocator: ^14.0.2
+  google_fonts: ^8.0.2
   google_maps_flutter: ^2.14.2
+  latlong2: ^0.9.1
   shared_preferences: ^2.2.2
   url_launcher: ^6.3.2
 
