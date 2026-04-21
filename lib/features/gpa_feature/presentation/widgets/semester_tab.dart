@@ -1,6 +1,7 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
-import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/action_button.dart';
-import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/add_button.dart';
+import 'package:ai_campus_guide/core/utils/custom_button.dart';
+import 'package:ai_campus_guide/core/utils/gpa_action_buttons.dart';
+import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/cumulative_tab.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/formula_card.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/gpa_course_row.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/grade_table.dart';
@@ -33,14 +34,10 @@ class SemesterTab extends StatelessWidget {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
-        // ── شرح المعادلة ────────────────────────────────────────────────
         const SliverToBoxAdapter(
             child: FormulaCard(
-          formulaAr: 'GPA الفصل = Σ(نقاط × ساعات) ÷ Σ ساعات',
           formulaEn: 'Semester GPA = Σ(Points × Hours) ÷ Σ Hours',
         )),
-
-        // ── قائمة الكورسات ───────────────────────────────────────────────
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverList(
@@ -55,53 +52,25 @@ class SemesterTab extends StatelessWidget {
             ),
           ),
         ),
-
-        // ── زر إضافة كورس ───────────────────────────────────────────────
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: AddButton(
-              label: '+ Add Course  /  أضف مقرر',
-              onTap: onAdd,
-            ),
+            child: CustomButton(
+                text: 'Add Course',
+                textColor: AppColors.primary,
+                backgroundColor:
+                    AppColors.textSecondary.withValues(alpha: 0.15),
+                onTap: onAdd),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-        // ── أزرار الحساب والإعادة ────────────────────────────────────────
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ActionButton(
-                    label: 'Calculate  /  احسب',
-                    icon: Icons.calculate_rounded,
-                    color: AppColors.primary,
-                    onTap: onCalculate,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                ActionButton(
-                  label: 'Reset',
-                  icon: Icons.refresh_rounded,
-                  color: AppColors.textSecondary,
-                  onTap: onReset,
-                  small: true,
-                ),
-              ],
-            ),
-          ),
-        ),
-
-        // ── النتيجة ──────────────────────────────────────────────────────
+        GpaActionButtons(onCalculate: onCalculate, onReset: onReset),
         if (result != null)
           SliverToBoxAdapter(
             child: ResultCard(gpa: result!, isSemester: true),
           ),
 
-        // ── جدول التقديرات ───────────────────────────────────────────────
         const SliverToBoxAdapter(child: GradeTable()),
         const SliverToBoxAdapter(child: SizedBox(height: 32)),
       ],

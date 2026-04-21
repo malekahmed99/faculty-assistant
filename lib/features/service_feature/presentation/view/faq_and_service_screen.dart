@@ -66,7 +66,10 @@ class _FaqScreenState extends State<FaqScreen>
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           ServicesAppBar(
             tabController: _tabCtrl,
-            forceElevated: innerBoxIsScrolled,
+            forceElevated: innerBoxIsScrolled, tab1: 'Services', tab2: 'FAQ',
+            titleName: 'Services',
+            subTitle: 'Affairs',
+            description: 'Every service you need in one place',
           ),
         ],
         body: TabBarView(

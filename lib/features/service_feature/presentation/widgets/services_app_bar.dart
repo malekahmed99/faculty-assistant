@@ -6,10 +6,16 @@ import 'package:flutter/material.dart';
 class ServicesAppBar extends StatelessWidget {
   final TabController tabController;
   final bool forceElevated;
+  final String tab1, tab2, titleName, subTitle, description;
   const ServicesAppBar({
     super.key,
     required this.tabController,
     required this.forceElevated,
+    required this.tab1,
+    required this.tab2,
+    required this.titleName,
+    required this.subTitle,
+    required this.description,
   });
 
   @override
@@ -17,18 +23,22 @@ class ServicesAppBar extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: 200,
       pinned: true,
-      floating: false,
+      floating: true,
+      snap: true,
       forceElevated: forceElevated,
       backgroundColor: AppColors.primaryDark,
       leading: const SizedBox.shrink(),
-      flexibleSpace: const FlexibleSpaceBar(
+      flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,
-        background: ServicesHeader(),
+        background: ServicesHeader(
+          titleName: titleName,
+          subTitle: subTitle,
+          description: description,
+        ),
       ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(52),
-        child: ServiceTabBar(
-            controller: tabController, tab1: 'Services', tab2: 'FAQ'),
+        child: ServiceTabBar(controller: tabController, tab1: tab1, tab2: tab2),
       ),
     );
   }

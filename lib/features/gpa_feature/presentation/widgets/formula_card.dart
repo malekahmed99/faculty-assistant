@@ -2,10 +2,10 @@ import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class FormulaCard extends StatelessWidget {
-  final String formulaAr;
+  // final String formulaAr;
   final String formulaEn;
 
-  const FormulaCard({super.key, required this.formulaAr, required this.formulaEn});
+  const FormulaCard({super.key, required this.formulaEn});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class FormulaCard extends StatelessWidget {
               Icon(Icons.functions_rounded, size: 16, color: AppColors.primary),
               SizedBox(width: 6),
               Text(
-                'Formula  /  المعادلة',
+                'Formula',
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
@@ -44,14 +44,6 @@ class FormulaCard extends StatelessWidget {
                 color: AppColors.textPrimary),
           ),
           const SizedBox(height: 3),
-          Text(
-            formulaAr,
-            style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textSecondary),
-            textDirection: TextDirection.rtl,
-          ),
         ],
       ),
     );

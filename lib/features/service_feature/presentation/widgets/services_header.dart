@@ -3,8 +3,12 @@ import 'package:ai_campus_guide/features/home_feature/presentation/widgets/welco
 import 'package:flutter/material.dart';
 
 class ServicesHeader extends StatelessWidget {
-  const ServicesHeader({super.key});
-
+  const ServicesHeader(
+      {super.key,
+      required this.titleName,
+      required this.subTitle,
+      required this.description});
+  final String titleName, subTitle, description;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,21 +21,20 @@ class ServicesHeader extends StatelessWidget {
           colors: [Color(0xFF1B4FCC), Color(0xFF1338A8), Color(0xFF0D2680)],
         ),
       ),
-      child: const Stack(
+      child: Stack(
         children: [
-          DecorationBackgroungStackHomeScreen(),
+          const DecorationBackgroungStackHomeScreen(),
           SafeArea(
             bottom: false,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(24, 16, 24, 56),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 56),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // CustomHomeAppBar(blinkAnim: blinkAnim),
                   WelcomeSectionHomeScreen(
-                    tileName: 'Student',
-                    subTitle: 'Affairs',
-                    description: 'Every service you need in one place',
+                    tileName: titleName,
+                    subTitle: subTitle,
+                    description: description,
                   ),
                   // const SearchSection(),
                 ],
