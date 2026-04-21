@@ -43,7 +43,7 @@ class GpaCourseRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Course ${index + 1}  •  مقرر ${index + 1}',
+                'Course ${index + 1}',
                 style: const TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -74,15 +74,12 @@ class GpaCourseRow extends StatelessWidget {
           TextFormField(
             initialValue: course.name,
             style: const TextStyle(fontSize: 13, color: AppColors.textPrimary),
-            decoration: _inputDecoration('Course Name  /  اسم المقرر'),
+            decoration: _inputDecoration('Course Name'),
             onChanged: (v) => onChanged(course.copyWith(name: v)),
           ),
           const SizedBox(height: 8),
-
-          // ── الساعات والتقدير في صف واحد ───────────────────────────────
           Row(
             children: [
-              // الساعات المعتمدة
               Expanded(
                 flex: 2,
                 child: TextFormField(
@@ -95,7 +92,7 @@ class GpaCourseRow extends StatelessWidget {
                   ],
                   style: const TextStyle(
                       fontSize: 13, color: AppColors.textPrimary),
-                  decoration: _inputDecoration('Hours / ساعات'),
+                  decoration: _inputDecoration('Hours'),
                   onChanged: (v) {
                     final parsed = double.tryParse(v);
                     if (parsed != null && parsed > 0) {

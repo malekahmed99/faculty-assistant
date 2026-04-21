@@ -1,7 +1,6 @@
 import 'package:ai_campus_guide/core/theme/app_colors.dart';
 import 'package:ai_campus_guide/core/utils/custom_button.dart';
 import 'package:ai_campus_guide/core/utils/gpa_action_buttons.dart';
-import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/cumulative_tab.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/formula_card.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/gpa_course_row.dart';
 import 'package:ai_campus_guide/features/gpa_feature/presentation/widgets/grade_table.dart';
