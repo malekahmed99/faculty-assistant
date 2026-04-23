@@ -29,7 +29,8 @@ class MapScreenBody extends StatelessWidget {
                   TileLayer(
                     urlTemplate:
                         'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-                    subdomains: ['a', 'b', 'c', 'd'],
+                    subdomains: const ['a', 'b', 'c', 'd'],
+                    userAgentPackageName: 'com.example.ai_campus_guide',
                   ),
                   if (state.userLocation != null)
                     MarkerLayer(
@@ -90,6 +91,7 @@ class MapScreenBody extends StatelessWidget {
                 bottom: 100,
                 right: 16,
                 child: FloatingActionButton(
+                  backgroundColor: AppColors.primary,
                   onPressed: () => context.read<MapCubit>().locateUser(),
                   child: const Icon(Icons.my_location),
                 ),
