@@ -30,7 +30,7 @@ class MapCubit extends Cubit<MapState> {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        emit(state.copyWith(error: 'افتح الـ GPS'));
+        emit(state.copyWith(error: 'Open GPS to get your location'));
         return;
       }
 
@@ -40,14 +40,15 @@ class MapCubit extends Cubit<MapState> {
         permission = await Geolocator.requestPermission();
 
         if (permission == LocationPermission.denied) {
-          emit(state.copyWith(error: 'تم رفض الإذن'));
+          emit(state.copyWith(error: 'The premission was denied'));
           return;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
         await Geolocator.openAppSettings();
-        emit(state.copyWith(error: 'افتح الإذن من الإعدادات'));
+        emit(state.copyWith(
+            error: 'Open app settings to grant location permission'));
         return;
       }
 
@@ -77,7 +78,7 @@ class MapCubit extends Cubit<MapState> {
         error: null,
       ));
     } catch (e) {
-      emit(state.copyWith(error: 'خطأ في تحديد الموقع'));
+      emit(state.copyWith(error: 'error to detect the location'));
     }
   }
 }
